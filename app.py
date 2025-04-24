@@ -16,14 +16,14 @@ def terima_lokasi():
     if latitude and longitude:
         with open("lokasi.txt", "a") as f:
             f.write(f"{waktu} - Latitude: {latitude}, Longitude: {longitude}\n")
-        print(f"Lokasi diterima: {latitude}, {longitude}")
-        return jsonify({"status": "sukses", "message": "Lokasi diterima"}), 200
+        print(f"Location Captured: {latitude}, {longitude}")
+        return jsonify({"status": "success", "message": "Location Captured"}), 200
     else:
-        return jsonify({"status": "gagal", "message": "Data tidak lengkap"}), 400
+        return jsonify({"status": "failed", "message": "Location Can't be Reached e"}), 400
 
 @app.route('/')
 def index():
-    return "Server aktif dan siap menerima lokasi."
+    return "Server Activated"
 
 if __name__ == '__main__':
     app.run(debug=True)
