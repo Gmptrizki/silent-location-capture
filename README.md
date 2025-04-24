@@ -74,3 +74,9 @@ python app.py
 > 🛠️ Maintained by gmptrizki
 ```
 
+![image](https://github.com/user-attachments/assets/f15a83f6-8ada-4a75-afb3-5afb96bbc861)
+
+![image](https://github.com/user-attachments/assets/2cbea02f-3e8c-46c1-85fb-9f5db9e46855)
+
+
+
